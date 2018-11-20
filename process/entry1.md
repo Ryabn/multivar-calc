@@ -1,6 +1,8 @@
 Nov 18, 2018<br>
 10:52PM
 
+# Thinking Out Loud
+
 Currently thinking of writing a calculator for some topics covered in the general multivariable calculus class since this service isn't found anywhere online. For the most part, online calculators stop at single integral calculators and graphing can cover basic graphing functions. I decided to do this in my 7 am multi variable calculus class as we were discussing surface integrals and there was no online calculator for it and so definately none with steps.
 
 
@@ -8,6 +10,7 @@ I'm pretty familiar with [Integral Calculator](https://www.integral-calculator.c
 
 The entire way it works is pretty interesting so here's the gist of it: 
 
+## Existing Solution for Basic Calc Functions
 1. The user input is parsed browser side with Javascript into the proper LaTeX format using an algorithm called the Shunting-Yard algorithm
 
 2. It then takes this analyzed user input and sends it back to the server where it's analyzed by Maxima (a CAS that I don't plan on writing a javascript version of)
@@ -24,6 +27,8 @@ Good thing is that there exists a way to implement Python in the browser using a
 
 It would seem however, that I would need to implement a couple libraries:
 
+## Prelim Library List
+---
 - [ ] [SymPy](https://www.sympy.org/en/index.html) for actual solving of basic integrals/derivatives
 - [ ] [Skulpt](http://www.skulpt.org/) to execute SymPy inbrowser since it's written in Python
 - [ ] Various JS UI libraries to not make my calculator look like Wolfram Alpha

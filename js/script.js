@@ -1,8 +1,8 @@
 function load(){
     calculateEquationReturnData(equation, {
-        x1 : -100,
-        x2 : 100,
-        y1 : -100,
-        y2 : 100,
+        x1 : -5,
+        x2 : 5,
+        y1 : -5,
+        y2 : 5,
     });
 }

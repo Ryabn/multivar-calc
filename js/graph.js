@@ -1,5 +1,5 @@
 function equation(x, y){
-    return Math.cos(x) * Math.sin(y);
+    return x*y*x*y;
 }
 function calculateEquationReturnData(equation, limits){
     let x = [], y = [], z = [];
@@ -11,22 +11,31 @@ function calculateEquationReturnData(equation, limits){
         zS: 0,
         zL: 0,
     };
-    for ( let xCoordinate = limits.x1; xCoordinate < limits.x2; xCoordinate++ ) {
-        x[xCoordinate] = [];
-        y[xCoordinate] = [];
-        z[xCoordinate] = [];
-        for( let yCoordinate = limits.y1; yCoordinate < limits.y2; yCoordinate++ ){
+    for ( let xCoordinate = limits.x1; xCoordinate <= limits.x2; xCoordinate++ ) {
+        x[xCoordinate+5] = [];
+        y[xCoordinate+5] = [];
+        z[xCoordinate+5] = [];
+        for( let yCoordinate = limits.y1; yCoordinate <= limits.y2; yCoordinate++ ){
             let zCoordinate = equation(xCoordinate, yCoordinate);
-            if(zCoordinate > zL)
-            x[xCoordinate].push(xCoordinate);
-            y[xCoordinate].push(yCoordinate);
-            z[xCoordinate].push(zCoordinate);
+            if(zCoordinate > dimensions.zL){
+                dimensions.zL = zCoordinate;
+            }
+            if(zCoordinate < dimensions.zS){
+                dimensions.zS = zCoordinate;
+            }
+            x[xCoordinate+5].push(xCoordinate);
+            y[xCoordinate+5].push(yCoordinate);
+            z[xCoordinate+5].push(zCoordinate);
         }
     }
+    console.log(x, y, z);
     graph(z, dimensions);
 }
-function graph(z, dimensions){
+
+function graph(x, y, z, dimensions){
     var data = [{
+        x: x,
+        y: y,
         z: z,
         type: 'surface', 
         showscale: false
@@ -49,7 +58,6 @@ function graph(z, dimensions){
                 z: 2,
             },
             xaxis: {
-                color: '#000',
                 range: [ dimensions.xS, dimensions.xL ],
             },
             yaxis: {

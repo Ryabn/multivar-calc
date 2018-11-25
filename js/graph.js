@@ -1,17 +1,23 @@
 function graph(equation){
     let x = [], y = [], z = [];
-    for ( let xCoordinate = 0; xCoordinate < 30; xCoordinate++ ) {
-        for( let yCoordinate = 0; yCoordinate < 30; yCoordinate++ ){
-            x.push(xCoordinate);
-            y.push(yCoordinate);
-            z.push(x+y);
+    for ( let xCoordinate = 0; xCoordinate < 10; xCoordinate++ ) {
+        x[xCoordinate] = [];
+        y[xCoordinate] = [];
+        z[xCoordinate] = [];
+        for( let yCoordinate = 0; yCoordinate < 10; yCoordinate++ ){
+            x[xCoordinate].push(xCoordinate);
+            y[xCoordinate].push(yCoordinate);
+            z[xCoordinate].push(xCoordinate*xCoordinate+yCoordinate);
+            console.log(`(${x[xCoordinate][yCoordinate]}, ${y[xCoordinate][yCoordinate]}, ${z[xCoordinate][yCoordinate]})`);
         }
     }
+    z.forEach(e =>{
+        console.log(e);
+    })
     var data = [{
-        x: x,
-        y: y,
         z: z,
         type: 'surface', 
+        showscale: false
     }];
     var layout = {
         autosize: true,

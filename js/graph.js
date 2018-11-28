@@ -3,7 +3,7 @@ function equation(x, y){
 }
 function calculateEquationReturnData(equation, limits){
     let x = [], y = [], z = [];
-    let dimensions = {
+    let graphBoundaries = {
         xS: limits.x1,
         xL: limits.x2,
         yS: limits.y1,
@@ -12,33 +12,35 @@ function calculateEquationReturnData(equation, limits){
         zL: 0,
     };
     for ( let xCoordinate = limits.x1; xCoordinate <= limits.x2; xCoordinate++ ) {
-        x[xCoordinate+5] = [];
-        y[xCoordinate+5] = [];
-        z[xCoordinate+5] = [];
+        x[xCoordinate-limits.x1] = [];
+        y[xCoordinate-limits.x1] = [];
+        z[xCoordinate-limits.x1] = [];
         for( let yCoordinate = limits.y1; yCoordinate <= limits.y2; yCoordinate++ ){
             let zCoordinate = equation(xCoordinate, yCoordinate);
-            if(zCoordinate > dimensions.zL){
-                dimensions.zL = zCoordinate;
+            if(zCoordinate > graphBoundaries.zL){
+                graphBoundaries.zL = zCoordinate;
             }
-            if(zCoordinate < dimensions.zS){
-                dimensions.zS = zCoordinate;
+            if(zCoordinate < graphBoundaries.zS){
+                graphBoundaries.zS = zCoordinate;
             }
-            x[xCoordinate+5].push(xCoordinate);
-            y[xCoordinate+5].push(yCoordinate);
-            z[xCoordinate+5].push(zCoordinate);
+            x[xCoordinate-limits.x1].push(xCoordinate);
+            y[xCoordinate-limits.x1].push(yCoordinate);
+            z[xCoordinate-limits.x1].push(zCoordinate);
         }
     }
-    console.log(x, y, z);
-    graph(z, dimensions);
+    //Z Max will be either highest z value or x1 limit 0 depending on which is smaller
+    graphBoundaries.zL = graphBoundaries.zL > limits.x2 ? limits.x2 : graphBoundaries.zL;
+    graphBoundaries.zS = graphBoundaries.zS < limits.x1 ? limits.x2 : graphBoundaries.zS;
+    graph(x, y, z, graphBoundaries);
 }
 
-function graph(x, y, z, dimensions){
+function graph(x, y, z, graphBoundaries){
     var data = [{
         x: x,
         y: y,
         z: z,
         type: 'surface', 
-        showscale: false
+        showscale: true
     }];
     var layout = {
         autosize: false,
@@ -58,13 +60,13 @@ function graph(x, y, z, dimensions){
                 z: 2,
             },
             xaxis: {
-                range: [ dimensions.xS, dimensions.xL ],
+                range: [ graphBoundaries.xS, graphBoundaries.xL ],
             },
             yaxis: {
-                range: [ dimensions.yS, dimensions.yL ],
+                range: [ graphBoundaries.yS, graphBoundaries.yL ],
             },
             zaxis: {
-                range: [ dimensions.zS, dimensions.zL ],
+                range: [ graphBoundaries.zS, graphBoundaries.zL ],
             }
         }
     };

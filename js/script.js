@@ -1,8 +1,15 @@
+let equationArray = [];
+let graphArea;
+
+let inputEquation = function(x, y){
+    return x*x*y*y;
+}
 function load(){
-    calculateEquationReturnData(equation, {
-        x1 : -10,
-        x2 : 10,
-        y1 : -10,
-        y2 : 10,
-    });
+    graphArea = new plot();
+    // addEquation(inputEquation);
+    
+}
+function addEquation(inputEquation){
+
+    equationArray.push(new equation(inputEquation, -10, 10, -10, 10));
 }

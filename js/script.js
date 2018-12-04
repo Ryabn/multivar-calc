@@ -4,7 +4,12 @@ let graphArea;
 let inputEquation = function(x, y){
     return x*x*y*y;
 }
+/**
+ * create graphing area
+ * read first line
+ */
 function load(){
+    
     graphArea = new plot();
     // addEquation(inputEquation);
     

@@ -28,7 +28,7 @@ class plot{
                 }
             }
         };
-        Plotly.newPlot( 'graph', [{ x:[0, 1, 2, 3 ], y: [0, 1, 2, 3], z:[0, 0, 0, 0], type: 'surface', 
+        Plotly.newPlot( 'graph', [{ x: [0], y:[0], z: [0], type: 'surface', 
         showscale: true}], this.layout );
     }
     graph(x, y, z, limits){
